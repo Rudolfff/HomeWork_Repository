@@ -3,25 +3,13 @@ public abstract class Quadrangular extends Figure {
     double Side_2;
     double Side_3;
     double Side_4;
-    double Angel_1;
-    double Angel_2;
-    double Angel_3;
-    double Angel_4;
 
-    public Quadrangular() {
-        super();
-        double Side_1 = 1;
-        double Side_2 = 1;
-        double Side_3 = 1;
-        double Side_4 = 1;
-        double Angel_1 = 90;
-        double Angel_2 = 90;
-        double Angel_3 = 90;
-        double Angel_4 = 90;
-
-        if (Angel_1 + Angel_2 + Angel_3 + Angel_4 != 360) {
-            throw new RuntimeException("Сумма углов четырехугольника не должна превышать 360 градусов");
-        }
+    public Quadrangular(double FigureArea, double FigurePerimeter, double side_1, double side_2, double side_3, double side_4) {
+        super(FigureArea, FigurePerimeter);
+        Side_1 = side_1;
+        Side_2 = side_2;
+        Side_3 = side_3;
+        Side_4 = side_4;
         if (Side_1 <= 0 || Side_2 <= 0 || Side_3 <= 0 || Side_4 <= 0) {
             throw new RuntimeException("Сторона в четырехугольнике не может быть меньше или равной 0");
         }
@@ -41,21 +29,5 @@ public abstract class Quadrangular extends Figure {
 
     public double getSide_4() {
         return Side_4;
-    }
-
-    public double getAngel_1() {
-        return Angel_1;
-    }
-
-    public double getAngel_2() {
-        return Angel_2;
-    }
-
-    public double getAngel_3() {
-        return Angel_3;
-    }
-
-    public double getAngel_4() {
-        return Angel_4;
     }
 }

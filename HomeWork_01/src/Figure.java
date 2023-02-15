@@ -2,7 +2,9 @@ public abstract class Figure {
     double FigureArea;
     double FigurePerimeter;
 
-    public Figure() {
+    public Figure(double FigureArea, double FigurePerimeter) {
+    this.FigureArea = FigureArea;
+    this.FigurePerimeter = FigurePerimeter;
     }
 
     public double getFigureArea() {
