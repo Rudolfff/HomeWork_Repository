@@ -10,6 +10,7 @@ public class Cook {
     public Cook() {
         this.randomCook();
     } // Создает случайного повара
+
     public Cook(String name, int orderForOur, int salary) {
         this.name = name;
         this.orderForOur = orderForOur;
@@ -34,12 +35,20 @@ public class Cook {
         return orderNowDoing;
     }
 
+    public OrderList getArrayOrderCook() {
+        return arrayOrderCook;
+    }
+
     public void setOrderNowDoing(int orderNowDoing) {
         this.orderNowDoing = orderNowDoing;
     }
 
+    public void setNewOrder(Order x) {
+        arrayOrderCook.orderPlus(x);
+    }
+
     public Cook randomCook() {
-        String h = "Вася №" + (int)(Math.random() * 100);
+        String h = "Вася №" + (int) (Math.random() * 100);
         Cook x = new Cook(h, (int) (1 + Math.random() * 4), (int) (1500 + Math.random() * 1000));
         return x;
     } // передать число поваров, которые уже есть
