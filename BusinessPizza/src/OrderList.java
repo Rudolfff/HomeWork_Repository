@@ -57,6 +57,25 @@ public class OrderList {
         }
     } // Возвращает true если первый элемент неравен null
 
+    public void Sort() {
+        boolean x = true;
+        while (x) {
+            int score = 0;
+            for (int i = 0; i < this.lastOrder; i++) {
+                Order temp;
+                if (this.orderList[i].getTimeIsGone() > this.orderList[i + 1].getTimeIsGone()) {
+                    temp = this.orderList[i + 1];
+                    this.orderList[i + 1] = this.orderList[i];
+                    this.orderList[i] = temp;
+                    score++;
+                }
+            }
+            if (score == 0) {
+                x = false;
+            }
+        }
+    } // В конец списка "всплывают" заказы с самым большим временем исполнения
+
     public int getSize() {
         return size;
     }
