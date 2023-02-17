@@ -47,6 +47,10 @@ public class Cook {
         arrayOrderCook.orderPlus(x);
     }
 
+    public Order OrderToStock() {
+        return this.arrayOrderCook.orderMinus();
+    }
+
     public Cook randomCook() {
         String h = "Вася №" + (int) (Math.random() * 100);
         Cook x = new Cook(h, (int) (1 + Math.random() * 4), (int) (1500 + Math.random() * 1000));

@@ -8,6 +8,7 @@ public class Stock {
         this.size = size;
         this.arrayOrder = new OrderList(size);
         this.payForOnePlace = payForOnePlace;
+        this.nowFull = 0;
     }
 
     public int getNowFull() {
@@ -22,13 +23,6 @@ public class Stock {
         return payForOnePlace;
     }
 
-    public void setNowFull(int nowFull) {
-        if (nowFull <= size && nowFull >= 0) {
-            this.nowFull = nowFull;
-        } else {
-            System.out.println("Такое заполнение склада невозможно");
-        }
-    }
 
     public void setSize(int size) {
         if (size > 0) {
@@ -38,7 +32,20 @@ public class Stock {
         }
     }
 
+    public OrderList getArrayOrder() {
+        return arrayOrder;
+    }
+
     public int payForStockInDay() {
         return this.size * this.payForOnePlace;
     }
+
+    public void PlaceOrderInStock(Order x) {
+        this.arrayOrder.orderPlus(x);
+    }
+
+    public Order OrderToDelivery() {
+        return this.arrayOrder.orderMinus();
+    }
+
 }

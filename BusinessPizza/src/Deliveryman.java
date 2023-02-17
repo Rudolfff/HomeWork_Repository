@@ -14,4 +14,16 @@ public class Deliveryman {
     private Deliveryman randomDeliveryman() {
         return new Deliveryman((int)(1 + Math.random() * 6), (int)(1000 + Math.random() * 500));
     }
+
+    public void PlaceOrderInDelivery(Order x) {
+        this.ordersArray.orderPlus(x);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public OrderList getOrdersArray() {
+        return ordersArray;
+    }
 }
