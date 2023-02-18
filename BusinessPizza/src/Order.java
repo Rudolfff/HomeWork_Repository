@@ -1,7 +1,10 @@
 public class Order {
-    private final int number;
-    private final int coast;
+    private int number;
+    private int coast;
     private int timeIsGone;
+
+    public Order() {
+    }
 
     public Order(int number, int coast) {
         this.number = number;

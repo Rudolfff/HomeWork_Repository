@@ -32,47 +32,57 @@ public class PizzaHouse {
         } // Добавляет в очередь заказы
         EnterOrders.Sort(); // перемещает в конец списка самые старые заказы
         for (Cook x : this.CookArray) {
-            for (int i = 0; i <= x.getOrderForOur() - x.getOrderNowDoing(); i++) {
-                if (EnterOrders.haveOrder()) {
-                    Order temp = EnterOrders.orderMinus();
-                    x.setNewOrder(temp);
-                    x.setOrderNowDoing(x.getOrderNowDoing() + 1);
-                    Stat.newCookOrd(temp);
-                    System.out.println("Передан на кухню " + temp.toString());
+            if (x != null) {
+                for (int i = 0; i <= x.getOrderForOur() - x.getOrderNowDoing(); i++) {
+                    if (EnterOrders.haveOrder()) {
+                        Order temp = EnterOrders.orderMinus();
+                        x.setNewOrder(temp);
+                        x.setOrderNowDoing(x.getOrderNowDoing() + 1);
+                        Stat.newCookOrd(temp);
+                        System.out.println("Передан на кухню " + temp.toString());
+                    }
                 }
             }
         } // Распределяет входящие заказы по поварам
         for (Cook x : this.CookArray) {
-            x.getArrayOrderCook().Sort();
-            if (x.getArrayOrderCook().haveOrder()) {
-                if (this.stock_1.getNowFull() < this.stock_1.getSize()) {
-                    Order temp = x.OrderToStock();
-                    stock_1.PlaceOrderInStock(temp);
-                    Stat.newStockOrd(temp);
-                    System.out.println("Передан на склад " + temp.toString());
+            if (x != null) {
+                x.getArrayOrderCook().Sort();
+                if (x.getArrayOrderCook().haveOrder()) {
+                    if (this.stock_1.getNowFull() < this.stock_1.getSize()) {
+                        Order temp = x.OrderToStock();
+                        stock_1.PlaceOrderInStock(temp);
+                        Stat.newStockOrd(temp);
+                        System.out.println("Передан на склад " + temp.toString());
+                    }
                 }
             }
         } // Сортируем заказы у поваров и передаем их на склад
         stock_1.getArrayOrder().Sort();
         for (Deliveryman x : this.DeliverymanArray) {
-            for (int i = 0; i < x.getSize(); i++) {
-                if (stock_1.getArrayOrder().haveOrder()) {
-                    Order temp = stock_1.OrderToDelivery();
-                    x.PlaceOrderInDelivery(temp);
-                    System.out.println("Передан в доставку " + temp.toString());
+            if (x != null) {
+                for (int i = 0; i < x.getSize(); i++) {
+                    if (stock_1.getArrayOrder().haveOrder()) {
+                        Order temp = stock_1.OrderToDelivery();
+                        x.PlaceOrderInDelivery(temp);
+                        System.out.println("Передан в доставку " + temp.toString());
+                    }
                 }
             }
         } // Сортирует заказы на складе и передает их в доставку
         for (Deliveryman x : this.DeliverymanArray) {
-            if (x.getOrdersArray().haveOrder()) {
-                for (int i = 0; i < x.getSize(); i++) {
-                    if (x.getOrdersArray().getArray()[i].getTimeIsGone() <= 3) {
-                        this.bank += x.getOrdersArray().getArray()[i].getCoast();
-                        System.out.println("Доставлен " + x.getOrdersArray().getArray()[i].toString());
-                    } else {
-                        System.out.println("Доставлен бесплатно " + x.getOrdersArray().getArray()[i].toString());
+            if (x != null) {
+                if (x.getOrdersArray().haveOrder()) {
+                    for (int i = 0; i < x.getSize(); i++) {
+                        if (x.getOrdersArray().getArray()[i] != null) {
+                            if (x.getOrdersArray().getArray()[i].getTimeIsGone() <= 3) {
+                                this.bank += x.getOrdersArray().getArray()[i].getCoast();
+                                System.out.println("Доставлен " + x.getOrdersArray().getArray()[i].toString());
+                            } else {
+                                System.out.println("Доставлен бесплатно " + x.getOrdersArray().getArray()[i].toString());
+                            }
+                            x.getOrdersArray().getArray()[i] = null;
+                        }
                     }
-                    x.getOrdersArray().getArray()[i] = null;
                 }
             }
         } // Если время исполнения заказа 3 часа или меньше, то записывает цену заказа в банк как прибыль. Очищает ячейки мест.
@@ -81,7 +91,9 @@ public class PizzaHouse {
     public void TimeIsGone() {
         this.EnterOrders.TimeIsGone();
         for (Cook x : this.CookArray) {
-            x.getArrayOrderCook().TimeIsGone();
+            if (x != null) {
+                x.getArrayOrderCook().TimeIsGone();
+            }
         }
         this.stock_1.getArrayOrder().TimeIsGone();
     } // Время прошло для входящих заказов, заказов у поваров и на складе
@@ -89,7 +101,9 @@ public class PizzaHouse {
     public void ClearArrays() {
         this.EnterOrders.ClearArray();
         for (Cook x : this.CookArray) {
-            x.getArrayOrderCook().ClearArray();
+            if (x != null) {
+                x.getArrayOrderCook().ClearArray();
+            }
         }
         this.stock_1.getArrayOrder().ClearArray();
     }
@@ -113,11 +127,15 @@ public class PizzaHouse {
     public void PayForAll() {
         int x = 0;
         for (Cook man : this.CookArray) {
-            x += man.getSalary();
+            if (man != null) {
+                x += man.getSalary();
+            }
         }
         x += this.stock_1.getSize() * this.stock_1.payForStockInDay();
         for (Deliveryman man : this.DeliverymanArray) {
-            x += man.getSalary();
+            if (man != null) {
+                x += man.getSalary();
+            }
         }
         this.bank -= x;
         System.out.println("Оплачено " + x + ". \nОсталось на счету: " + bank);
@@ -133,6 +151,7 @@ public class PizzaHouse {
             }
         }
     }
+
     public void hireNewDeliveryman() {
         for (int i = 1; i < 10; i++) {
             if (this.DeliverymanArray[i] == null) {
@@ -143,6 +162,7 @@ public class PizzaHouse {
             }
         }
     }
+
     public void fireCook() {
         for (int i = 9; i > 0; i--) {
             if (this.CookArray[i] != null) {
@@ -153,6 +173,7 @@ public class PizzaHouse {
             }
         }
     }
+
     public void fireDeliveryman() {
         for (int i = 9; i > 0; i--) {
             if (this.DeliverymanArray[i] != null) {
@@ -175,6 +196,7 @@ public class PizzaHouse {
     public Stock getStock_1() {
         return stock_1;
     }
+
     public void ChangeOrderMultiply(double change) {
         this.orderMultiply += change;
     }

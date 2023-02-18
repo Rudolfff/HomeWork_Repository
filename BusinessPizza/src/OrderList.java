@@ -5,6 +5,9 @@ public class OrderList {
 
     public OrderList(int size) {
         this.orderList = new Order[size];
+        for (int i = 0; i < orderList.length; i++) {
+            orderList[i] = new Order();
+        }
         if (size >= 0) {
             this.size = size;
         } else {

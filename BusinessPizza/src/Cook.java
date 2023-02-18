@@ -8,7 +8,11 @@ public class Cook {
     private OrderList arrayOrderCook;
 
     public Cook() {
-        this.randomCook();
+        this.name = "Вася №" + (int) (Math.random() * 100);
+        this.orderForOur = (int) (1 + Math.random() * 4);
+        this.salary = (int) (1500 + Math.random() * 1000);
+        this.orderNowDoing = 0;
+        this.arrayOrderCook = new OrderList(orderForOur);
     } // Создает случайного повара
 
     public Cook(String name, int orderForOur, int salary) {
@@ -44,16 +48,10 @@ public class Cook {
     }
 
     public void setNewOrder(Order x) {
-        arrayOrderCook.orderPlus(x);
+        this.arrayOrderCook.orderPlus(x);
     }
 
     public Order OrderToStock() {
         return this.arrayOrderCook.orderMinus();
     }
-
-    public Cook randomCook() {
-        String h = "Вася №" + (int) (Math.random() * 100);
-        Cook x = new Cook(h, (int) (1 + Math.random() * 4), (int) (1500 + Math.random() * 1000));
-        return x;
-    } // передать число поваров, которые уже есть
 }
