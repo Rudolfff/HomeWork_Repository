@@ -1,7 +1,7 @@
 public class Order {
-    private int number;
-    private int coast;
-    private int timeIsGone;
+    private int number = -99;
+    private int coast = -99;
+    private int timeIsGone = -99 ;
 
     public Order() {
     }
@@ -27,11 +27,6 @@ public class Order {
     public void setTimeIsGone() {
         this.timeIsGone++;
     }
-
-    public Order randomOrder(int numberBefore) {
-        Order x = new Order(numberBefore + 1, (int)(250 + Math.random() * 1250));
-        return x;
-    } // нужно указать номер предыдущего заказа
 
     @Override
     public String toString() {
