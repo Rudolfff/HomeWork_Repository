@@ -47,5 +47,8 @@ public class Stock {
     public Order OrderToDelivery() {
         return this.arrayOrder.orderMinus();
     }
-
+    public void ChangeStockSize(int ChangeSize) {
+        this.size += ChangeSize;
+        this.arrayOrder.sizeExpend(this.size);
+    }
 }

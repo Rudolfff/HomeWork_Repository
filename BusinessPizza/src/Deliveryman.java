@@ -26,4 +26,8 @@ public class Deliveryman {
     public OrderList getOrdersArray() {
         return ordersArray;
     }
+
+    public int getSalary() {
+        return salary;
+    }
 }

@@ -106,4 +106,15 @@ public class OrderList {
         return this.orderList;
     }
 
+    public void TimeIsGone() {
+        for (int i = 0; i <= this.lastOrder; i++) {
+            this.orderList[i].setTimeIsGone();
+        }
+    }
+    public void ClearArray() {
+        for (int i = 0; i < this.orderList.length; i++) {
+            this.orderList[i] = null;
+        }
+        this.lastOrder = -1;
+    }
 }

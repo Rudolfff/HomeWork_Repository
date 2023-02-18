@@ -21,12 +21,21 @@ public class Order {
         return timeIsGone;
     }
 
-    public void setTimeIsGone(int timeIsGone) {
-        this.timeIsGone = timeIsGone;
+    public void setTimeIsGone() {
+        this.timeIsGone++;
     }
 
     public Order randomOrder(int numberBefore) {
         Order x = new Order(numberBefore + 1, (int)(250 + Math.random() * 1250));
         return x;
     } // нужно указать номер предыдущего заказа
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "number=" + number +
+                ", coast=" + coast +
+                ", timeIsGone=" + timeIsGone +
+                '}';
+    }
 }
